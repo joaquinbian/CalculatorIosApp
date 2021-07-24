@@ -1,23 +1,34 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {styles} from '../../theme/appTheme';
 
 interface Props {
   text: string;
   color?: string;
+  action?: (numText: string) => void;
 }
 
-const ButtonCalc = ({text, color = '#2D2D2D'}: Props) => {
+const ButtonCalc = ({text, color = '#2D2D2D', action}: Props) => {
+  const width = text === '0' ? 160 : 75;
   return (
-    <View style={{backgroundColor: color, ...styles.btnContainer}}>
-      <Text
+    <TouchableOpacity onPress={() => action(text)}>
+      <View
         style={{
-          ...styles.btnContent,
-          color: color === '#9B9B9B' ? '#000' : '#fff',
+          backgroundColor: color,
+          height: 75,
+          width,
+          ...styles.btnContainer,
         }}>
-        {text}
-      </Text>
-    </View>
+        <Text
+          style={{
+            ...styles.btnContent,
+            //   textAlign: text === '0' ? 'auto' : 'center',
+            color: color === '#9B9B9B' ? '#000' : '#fff',
+          }}>
+          {text}
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

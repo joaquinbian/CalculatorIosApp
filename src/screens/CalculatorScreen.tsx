@@ -1,37 +1,71 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {styles} from '../../theme/appTheme';
 import ButtonCalc from '../components/ButtonCalc';
 
 const CalculatorScreen = () => {
+  const [lastNum, setLastNum] = useState('0');
+  const [num, setNum] = useState('0');
+
+  const resetCalc = () => {
+    setNum('0');
+  };
+  const setNumber = (numText: string) => {
+    if (num.length === 1 && num === '0' && numText === '0') return;
+    // console.log('sigo por aca');
+    if (numText === '.' && num[num.length - 1] === '.') return;
+
+    if (num === '0' && numText !== '0') {
+      // console.log('entre');
+      return setNum(numText);
+    }
+    setNum(num + numText);
+    console.log(num[num.length - 1]);
+  };
+
+  const setPositiveNegative = () => {
+    num.includes('-') ? setNum(num.replace('-', '')) : setNum('-' + num);
+  };
+
   return (
     <View style={styles.calculatorContainer}>
-      <Text style={styles.lastResult}>1,500.00</Text>
-      <Text style={styles.result}>1,500.00</Text>
+      <Text style={styles.lastResult}>{lastNum}</Text>
+      <Text
+        style={styles.result}
+        numberOfLines={1}
+        adjustsFontSizeToFit //lo q hace esa propiedad es ajustar automaticamente el tamaño de la fuente
+      >
+        {num}
+      </Text>
 
       <View style={styles.buttonsContainer}>
-        <ButtonCalc text="C" color="#9B9B9B" />
-        <ButtonCalc text="+/-" color="#9B9B9B" />
-        <ButtonCalc text="del" color="#9B9B9B" />
-        <ButtonCalc text="/" color="#ff9427" />
+        <ButtonCalc text="C" color="#9B9B9B" action={resetCalc} />
+        <ButtonCalc text="+/-" color="#9B9B9B" action={setPositiveNegative} />
+        <ButtonCalc text="del" color="#9B9B9B" action={resetCalc} />
+        <ButtonCalc text="/" color="#ff9427" action={resetCalc} />
       </View>
       <View style={styles.buttonsContainer}>
-        <ButtonCalc text="C" color="#2D2D2D" />
-        <ButtonCalc text="+/-" color="#2D2D2D" />
-        <ButtonCalc text="del" color="#2D2D2D" />
-        <ButtonCalc text="/" color="#ff9427" />
+        <ButtonCalc text="7" action={setNumber} />
+        <ButtonCalc text="8" action={setNumber} />
+        <ButtonCalc text="9" action={setNumber} />
+        <ButtonCalc text="X" color="#ff9427" action={resetCalc} />
       </View>
       <View style={styles.buttonsContainer}>
-        <ButtonCalc text="C" color="#2D2D2D" />
-        <ButtonCalc text="+/-" color="#2D2D2D" />
-        <ButtonCalc text="del" color="#2D2D2D" />
-        <ButtonCalc text="/" color="#ff9427" />
+        <ButtonCalc text="4" action={setNumber} />
+        <ButtonCalc text="5" action={setNumber} />
+        <ButtonCalc text="6" action={setNumber} />
+        <ButtonCalc text="+" color="#ff9427" action={resetCalc} />
       </View>
       <View style={styles.buttonsContainer}>
-        <ButtonCalc text="C" color="#2D2D2D" />
-        <ButtonCalc text="+/-" color="#2D2D2D" />
-        <ButtonCalc text="del" color="#2D2D2D" />
-        <ButtonCalc text="/" color="#ff9427" />
+        <ButtonCalc text="1" action={setNumber} />
+        <ButtonCalc text="2" action={setNumber} />
+        <ButtonCalc text="3" action={setNumber} />
+        <ButtonCalc text="-" color="#ff9427" action={resetCalc} />
+      </View>
+      <View style={styles.buttonsContainer}>
+        <ButtonCalc text="0" action={setNumber} />
+        <ButtonCalc text="." action={setNumber} />
+        <ButtonCalc text="=" color="#ff9427" action={resetCalc} />
       </View>
     </View>
   );

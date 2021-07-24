@@ -24,13 +24,13 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    marginBottom: 18,
+    marginBottom: 10,
     // backgroundColor: 'red',
     // paddingHorizontal: 10,
   },
   btnContainer: {
-    height: 75,
-    width: 75,
+    // height: 75,
+    // width: 75,
     // backgroundColor: 'gray',
     borderRadius: 100,
     justifyContent: 'center',
@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
   btnContent: {
     color: '#fff',
     textAlign: 'center',
+    // paddingHorizontal: 30,
     fontSize: 25,
   },
 });
