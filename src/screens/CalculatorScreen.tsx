@@ -10,10 +10,18 @@ const CalculatorScreen = () => {
   const resetCalc = () => {
     setNum('0');
   };
+
+  const deleteLast = () => {
+    if (num.length === 1) {
+      setNum('0');
+    } else {
+      setNum(num.slice(0, -1));
+    }
+  };
   const setNumber = (numText: string) => {
     // if (num.length === 1 && num === '0' && numText === '0') return;
     // console.log('sigo por aca');
-    // if (numText === '.' && num[num.length - 1] === '.') return;
+    if (numText === '.' && num.includes('.')) return;
     if (num.startsWith('0') || num.startsWith('-0')) {
       if (num.length === 1 && num === '0' && numText === '0') return;
       else if (numText === '.' && num[num.length - 1] === '.') return;
@@ -50,7 +58,7 @@ const CalculatorScreen = () => {
       <View style={styles.buttonsContainer}>
         <ButtonCalc text="C" color="#9B9B9B" action={resetCalc} />
         <ButtonCalc text="+/-" color="#9B9B9B" action={setPositiveNegative} />
-        <ButtonCalc text="del" color="#9B9B9B" action={resetCalc} />
+        <ButtonCalc text="del" color="#9B9B9B" action={deleteLast} />
         <ButtonCalc text="/" color="#ff9427" action={resetCalc} />
       </View>
       <View style={styles.buttonsContainer}>
