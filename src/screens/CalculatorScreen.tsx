@@ -11,15 +11,24 @@ const CalculatorScreen = () => {
     setNum('0');
   };
   const setNumber = (numText: string) => {
-    if (num.length === 1 && num === '0' && numText === '0') return;
+    // if (num.length === 1 && num === '0' && numText === '0') return;
     // console.log('sigo por aca');
-    if (numText === '.' && num[num.length - 1] === '.') return;
-
-    if (num === '0' && numText !== '0') {
-      // console.log('entre');
-      return setNum(numText);
+    // if (numText === '.' && num[num.length - 1] === '.') return;
+    if (num.startsWith('0') || num.startsWith('-0')) {
+      if (num.length === 1 && num === '0' && numText === '0') return;
+      else if (numText === '.' && num[num.length - 1] === '.') return;
+      else if (num === '0' && numText === '.') {
+        setNum(num + numText); //esto es para q me haga el 0.
+      } else if (numText !== '0' && !num.includes('.')) {
+        setNum(numText);
+      } else if (numText === '0' && !num.includes('.')) {
+        setNum(numText);
+      } else {
+        setNum(num + numText);
+      } // if(num)
+    } else {
+      setNum(num + numText);
     }
-    setNum(num + numText);
     console.log(num[num.length - 1]);
   };
 
