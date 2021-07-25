@@ -5,7 +5,7 @@ import {styles} from '../../theme/appTheme';
 interface Props {
   text: string;
   color?: string;
-  action?: (numText: string) => void;
+  action: (numText: string) => void;
 }
 
 const ButtonCalc = ({text, color = '#2D2D2D', action}: Props) => {
